@@ -1,0 +1,15 @@
+pyrightconfig.json
+.venv/
+venv/
+src/*.egg-info/
+**/__pycache__/
+.pytest_cache/
+.python-version
+.DS_Store
+**/.speakeasy/temp/
+**/.speakeasy/logs/
+.speakeasy/reports
+.env
+.env.local
+.claude/
+tmp/
