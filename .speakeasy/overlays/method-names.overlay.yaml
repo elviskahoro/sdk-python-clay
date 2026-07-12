@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: Clay SDK method-name overrides
+  version: 0.0.1
+# Applied to openapi/openapi.json before generation (wired in .speakeasy/workflow.yaml).
+# Overlays edit the spec, so they can only fix spec-driven output (method names,
+# groups, descriptions, examples) — never generated Python control-flow or the
+# code-sample renderer. See the roborev findings for issues that live in codegen.
+actions:
+  # `operationId: getPublicApiMe` (tag: me) generates the clunky
+  # `client.me.get_public_api_me()`. Rename to `client.me.get()`.
+  - target: "$.paths['/me'].get"
+    description: Rename me.get_public_api_me() -> me.get()
+    update:
+      x-speakeasy-group: me
+      x-speakeasy-name-override: get

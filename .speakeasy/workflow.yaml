@@ -4,6 +4,8 @@ sources:
     Clay Public API:
         inputs:
             - location: openapi/openapi.json
+        overlays:
+            - location: .speakeasy/overlays/method-names.overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/elviskahoro-mft/elviskahoro/clay-public-api
