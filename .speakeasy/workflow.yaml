@@ -1,0 +1,19 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Clay Public API:
+        inputs:
+            - location: openapi/openapi.json
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/elviskahoro-mft/elviskahoro/clay-public-api
+targets:
+    clay:
+        target: python
+        source: Clay Public API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/elviskahoro-mft/elviskahoro/clay-public-api-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false

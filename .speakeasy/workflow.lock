@@ -1,0 +1,37 @@
+speakeasyVersion: 1.789.3
+sources:
+    Clay Public API:
+        sourceNamespace: clay-public-api
+        sourceRevisionDigest: sha256:89eee31ce21851b899afa9115fda300684cf2873fd3afd543f32afdbff201296
+        sourceBlobDigest: sha256:b58955b0b90b974a1d8d8ae351a222a8ed59361f43692086f43ebd0d56d8daa5
+        tags:
+            - latest
+            - "0"
+targets:
+    clay:
+        source: Clay Public API
+        sourceNamespace: clay-public-api
+        sourceRevisionDigest: sha256:89eee31ce21851b899afa9115fda300684cf2873fd3afd543f32afdbff201296
+        sourceBlobDigest: sha256:b58955b0b90b974a1d8d8ae351a222a8ed59361f43692086f43ebd0d56d8daa5
+        codeSamplesNamespace: clay-public-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:1a8c569d6e1075c5608b74018793a90d1245757f572a5fda8445bd96b02b667f
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Clay Public API:
+            inputs:
+                - location: openapi/openapi.json
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/elviskahoro-mft/elviskahoro/clay-public-api
+    targets:
+        clay:
+            target: python
+            source: Clay Public API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/elviskahoro-mft/elviskahoro/clay-public-api-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false
