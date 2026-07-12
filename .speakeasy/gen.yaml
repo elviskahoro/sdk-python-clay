@@ -85,12 +85,12 @@ python:
   methodArguments: infer-optional-args
   methodTimeoutArgument: timeout-ms
   methodTimeoutUnits: milliseconds
-  moduleName: ""
+  moduleName: clay
   multipartArrayFormat: standard
   optionalDependencies: {}
   outputModelSuffix: output
   packageManager: uv
-  packageName: clay
+  packageName: gtm-clay
   preApplyUnionDiscriminators: true
   pytestFilterWarnings: []
   pytestTimeout: 0

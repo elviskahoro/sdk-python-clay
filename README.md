@@ -56,7 +56,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add git+<UNSET>.git
+uv add gtm-clay
 ```
 
 ### PIP
@@ -64,7 +64,7 @@ uv add git+<UNSET>.git
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install gtm-clay
 ```
 
 ### Poetry
@@ -72,7 +72,7 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add gtm-clay
 ```
 
 ### Shell and script usage with `uv`
@@ -80,7 +80,7 @@ poetry add git+<UNSET>.git
 You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
 
 ```shell
-uvx --from clay python
+uvx --from gtm-clay python
 ```
 
 It's also possible to write a standalone Python script without needing to set up a whole project like so:
@@ -90,7 +90,7 @@ It's also possible to write a standalone Python script without needing to set up
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "clay",
+#     "gtm-clay",
 # ]
 # ///
 
