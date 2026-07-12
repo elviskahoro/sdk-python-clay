@@ -9,7 +9,7 @@ with Clay(
     clay_api_key=os.getenv("CLAY_CLAY_API_KEY", ""),
 ) as c_client:
 
-    res = c_client.me.get_public_api_me()
+    res = c_client.me.get()
 
     # Handle response
     print(res)
@@ -31,7 +31,7 @@ async def main():
         clay_api_key=os.getenv("CLAY_CLAY_API_KEY", ""),
     ) as c_client:
 
-        res = await c_client.me.get_public_api_me_async()
+        res = await c_client.me.get_async()
 
         # Handle response
         print(res)

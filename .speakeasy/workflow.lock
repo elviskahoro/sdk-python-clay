@@ -2,8 +2,8 @@ speakeasyVersion: 1.789.3
 sources:
     Clay Public API:
         sourceNamespace: clay-public-api
-        sourceRevisionDigest: sha256:89eee31ce21851b899afa9115fda300684cf2873fd3afd543f32afdbff201296
-        sourceBlobDigest: sha256:b58955b0b90b974a1d8d8ae351a222a8ed59361f43692086f43ebd0d56d8daa5
+        sourceRevisionDigest: sha256:81b4bf232b6c55618555e729c5aa1fb656d3ce75648e45fdf50fffed8b1cc70b
+        sourceBlobDigest: sha256:06da43a76eb90c3edbf11b7b82bf05b830503021c6e8d6fe33daff3711a27ce2
         tags:
             - latest
             - "0"
@@ -11,10 +11,10 @@ targets:
     clay:
         source: Clay Public API
         sourceNamespace: clay-public-api
-        sourceRevisionDigest: sha256:89eee31ce21851b899afa9115fda300684cf2873fd3afd543f32afdbff201296
-        sourceBlobDigest: sha256:b58955b0b90b974a1d8d8ae351a222a8ed59361f43692086f43ebd0d56d8daa5
+        sourceRevisionDigest: sha256:81b4bf232b6c55618555e729c5aa1fb656d3ce75648e45fdf50fffed8b1cc70b
+        sourceBlobDigest: sha256:06da43a76eb90c3edbf11b7b82bf05b830503021c6e8d6fe33daff3711a27ce2
         codeSamplesNamespace: clay-public-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:1a8c569d6e1075c5608b74018793a90d1245757f572a5fda8445bd96b02b667f
+        codeSamplesRevisionDigest: sha256:2afd77e9c584a0ef69745c4895eb0048e9817aec547dce1295bed8d4f18bfba7
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -22,6 +22,8 @@ workflow:
         Clay Public API:
             inputs:
                 - location: openapi/openapi.json
+            overlays:
+                - location: .speakeasy/overlays/method-names.overlay.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/elviskahoro-mft/elviskahoro/clay-public-api
