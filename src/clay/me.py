@@ -12,7 +12,7 @@ from typing import Any, Mapping, Optional
 class Me(BaseSDK):
     r"""Authenticated user and workspace endpoints."""
 
-    def get_public_api_me(
+    def get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -95,7 +95,7 @@ class Me(BaseSDK):
 
         raise errors.ClayDefaultError("Unexpected response received", http_res)
 
-    async def get_public_api_me_async(
+    async def get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

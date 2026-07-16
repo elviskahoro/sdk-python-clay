@@ -1,19 +1,20 @@
 lockVersion: 2.0.0
 id: cf98d2cf-b77b-4afd-a214-cb9cc82ecf3f
 management:
-  docChecksum: 61a5c53c04fe03b47865f0ba8a886a13
+  docChecksum: 09447c9fd33fa552bccab125400d1750
   docVersion: "0"
   speakeasyVersion: 1.789.3
   generationVersion: 2.916.4
   releaseVersion: 0.0.1
-  configChecksum: 22bc6364fb706e5d6b514993e6c7e539
+  configChecksum: fc20d16043c89169c793c865c6e6c0b3
 persistentEdits:
-  generation_id: 607fa8f8-59bd-4462-b69c-0f263d762e29
-  pristine_commit_hash: b027e9224366b883fe84dd4d5093e250bd727046
-  pristine_tree_hash: f31e1b5a415092b042b4a3982c201e5afd7dfcaf
+  generation_id: 07532a4d-7948-4345-867f-eb1837846565
+  pristine_commit_hash: c9c01f760f28c7b986221773a4a6141290157f57
+  pristine_tree_hash: 9ded0cbd5f54bcfa1d306c139d37a18e968ac588
 features:
   python:
     additionalDependencies: 1.1.0
+    configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.7
     core: 6.0.34
     defaultEnabledRetries: 0.2.0
@@ -26,7 +27,9 @@ features:
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.1
+    groups: 3.0.1
     methodArguments: 1.1.1
+    nameOverrides: 3.0.3
     nullables: 1.0.2
     responseFormat: 1.1.0
     retries: 3.0.7
@@ -55,8 +58,8 @@ trackedFiles:
     pristine_git_object: 8d79f0abb72526f1fb34a4c03e5bba612c6ba2ae
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:d6eb30e06fa46c6f0bc901b31daa1177ba239688
-    pristine_git_object: 1c83be3b830fa923dfea68493dfb48d48541dd10
+    last_write_checksum: sha1:58a69388202f81c31899a480180636e36690417b
+    pristine_git_object: 3d0f97e870e65524754a5dca8358f8321653dffa
   docs/errors/errorresponse.md:
     id: 910ef333346b
     last_write_checksum: sha1:ed65e2b11c27f056c58a7fec84967815ddc1886d
@@ -359,8 +362,8 @@ trackedFiles:
     pristine_git_object: a8b88fab650bdb7f936bdb6ba137c7c7e1f0834b
   docs/sdks/me/README.md:
     id: 2fbc298ff7b3
-    last_write_checksum: sha1:d643dbff5abba64eb286a750baee45ecbb131983
-    pristine_git_object: 05ff2c57fda22e5bf67e4361a89d5350c99ed2f3
+    last_write_checksum: sha1:c6ea13e840c6697a5a0b6f843c228da6f1fcfec4
+    pristine_git_object: afbaa1c9ad9e21378cf95df76473caeca683683d
   docs/sdks/routines/README.md:
     id: 0219bd7acd16
     last_write_checksum: sha1:0d88b0cb475c54f92cfc5883475ea3970f14761a
@@ -383,8 +386,8 @@ trackedFiles:
     pristine_git_object: cf228ca553340b06f21c29025506b03f4b6788d0
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:28f0434317beff7d3f36404672f0c78efedecc93
-    pristine_git_object: e7e976f33b1dbcdf05d0802a5a3f1aaf94d1a811
+    last_write_checksum: sha1:3a14d70fb653065350a40b50021f358313aa8362
+    pristine_git_object: a11ccf39e9ed483718666bed49f463c1e92d5101
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:adc9b741c12ad1591ab4870eabe20f0d0a86cd1a
@@ -407,8 +410,8 @@ trackedFiles:
     pristine_git_object: 804d8833b184e28b82bf25d68f9e1f8142339bb5
   src/clay/_version.py:
     id: 9d507c006777
-    last_write_checksum: sha1:a895da258df9c30561ec8d3dcef8cf012b450e50
-    pristine_git_object: 7df0937cc700e46beb109feb568b97cdf25ffc50
+    last_write_checksum: sha1:124e2a05a7a047744dbb5c34da0aea7a0853bb86
+    pristine_git_object: 2e664b983393a2cc51395cf39e6bf93854b1142c
   src/clay/basesdk.py:
     id: ae66f1d49031
     last_write_checksum: sha1:2698b2d7f577975e45ad7f3a644ac82608aa0270
@@ -443,8 +446,8 @@ trackedFiles:
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/clay/me.py:
     id: b7c988fc4110
-    last_write_checksum: sha1:66d2926dd52b73e5041041cf9b2aabf85bf3cb1b
-    pristine_git_object: 9ee7d01d475f8a2d04d58e26ff7550f95cb33896
+    last_write_checksum: sha1:ba177058b1885966c7394ff716845c2d4f7194d5
+    pristine_git_object: 7984619c00db79001870603d87f32ab90fec167e
   src/clay/models/__init__.py:
     id: 90e0c0367a76
     last_write_checksum: sha1:c021ce5c7cec51238e92c0bcf2c590501cf4956e

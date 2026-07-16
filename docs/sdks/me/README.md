@@ -6,9 +6,9 @@ Authenticated user and workspace endpoints.
 
 ### Available Operations
 
-* [get_public_api_me](#get_public_api_me) - Get the authenticated user
+* [get](#get) - Get the authenticated user
 
-## get_public_api_me
+## get
 
 Returns the Clay user and workspace associated with the API key.
 
@@ -24,7 +24,7 @@ with Clay(
     clay_api_key=os.getenv("CLAY_CLAY_API_KEY", ""),
 ) as c_client:
 
-    res = c_client.me.get_public_api_me()
+    res = c_client.me.get()
 
     # Handle response
     print(res)
