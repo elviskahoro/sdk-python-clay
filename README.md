@@ -215,6 +215,9 @@ with Clay(
 * [create_filters](docs/sdks/search/README.md#create_filters) - Create a search from structured filters
 * [fields](docs/sdks/search/README.md#fields) - List the filter fields available for a search source type
 * [run](docs/sdks/search/README.md#run) - Run the search iterator and return the next page of results
+* [create_query_mode](docs/sdks/search/README.md#create_query_mode) - Create a search from a Clay search query (beta)
+* [query_mode_reference](docs/sdks/search/README.md#query_mode_reference) - Get the Clay search query reference (beta)
+* [run_query_mode](docs/sdks/search/README.md#run_query_mode) - Run the query-mode iterator and return the next page of results (beta)
 
 ### [Tables](docs/sdks/tables/README.md)
 

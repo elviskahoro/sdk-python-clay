@@ -13,3 +13,9 @@ src/*.egg-info/
 .env.local
 .claude/
 tmp/
+# trunk machine-local caches (symlinks into ~/.cache/trunk)
+.trunk/actions
+.trunk/logs
+.trunk/notifications
+.trunk/out
+.trunk/tools

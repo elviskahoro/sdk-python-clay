@@ -139,6 +139,7 @@ class StructuredQueryTypedDict(TypedDict):
     group_by: NotRequired[List[str]]
     join: NotRequired[List[JoinTypedDict]]
     order_by: NotRequired[List[OrderByTypedDict]]
+    r"""Custom sort. Queries with a custom order_by do not support cursor pagination."""
     select: NotRequired[List[SelectTypedDict]]
 
 
@@ -156,6 +157,7 @@ class StructuredQuery(BaseModel):
     join: Optional[List[Join]] = None
 
     order_by: Optional[List[OrderBy]] = None
+    r"""Custom sort. Queries with a custom order_by do not support cursor pagination."""
 
     select: Optional[List[Select]] = None
 

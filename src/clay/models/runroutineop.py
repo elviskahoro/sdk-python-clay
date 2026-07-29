@@ -2,16 +2,14 @@
 
 from __future__ import annotations
 from .runroutinerequest import RunRoutineRequest, RunRoutineRequestTypedDict
-from clay.types import BaseModel, UNSET_SENTINEL
+from clay.types import BaseModel
 from clay.utils import FieldMetadata, PathParamMetadata, RequestMetadata
-from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
 class RunRoutineRequestRequestTypedDict(TypedDict):
     routine_id: str
-    body: NotRequired[RunRoutineRequestTypedDict]
+    body: RunRoutineRequestTypedDict
     r"""Body"""
 
 
@@ -21,23 +19,7 @@ class RunRoutineRequestRequest(BaseModel):
     ]
 
     body: Annotated[
-        Optional[RunRoutineRequest],
+        RunRoutineRequest,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
     r"""Body"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["body"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m

@@ -1,0 +1,34 @@
+overlay: 1.0.0
+info:
+  title: Clay SDK required request bodies
+  version: 0.0.1
+# Clay's spec omits `requestBody.required` on every POST, so Speakeasy generates
+# `request: Optional[...] = None`. Callers can then omit a body the API actually
+# demands and get a 400 at runtime instead of a type error.
+#
+# Only the operations whose body schema has required fields are listed here. The
+# two `{search_id}/run` endpoints are deliberately excluded: their body holds a
+# lone optional `limit`, so an omitted body is valid and means "use the default".
+#
+# Keep this in sync when new POST operations land — see openapi/README.md.
+actions:
+  - target: "$.paths['/routines/{routine_id}/run'].post.requestBody"
+    description: body requires `items`
+    update:
+      required: true
+  - target: "$.paths['/routines/{routine_id}/run-batch/start'].post.requestBody"
+    description: body requires `file_id`
+    update:
+      required: true
+  - target: "$.paths['/search/filters-mode'].post.requestBody"
+    description: body requires `source_type` and `filters`
+    update:
+      required: true
+  - target: "$.paths['/search/query-mode'].post.requestBody"
+    description: body requires `query`
+    update:
+      required: true
+  - target: "$.paths['/tables/query'].post.requestBody"
+    description: body requires `query`
+    update:
+      required: true
