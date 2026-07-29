@@ -65,7 +65,7 @@ components:
         - "status"
       type: "object"
     BatchResultsTerminal:
-      anyOf:
+      oneOf:
         - $ref: "#/components/schemas/BatchResultsValidationFailed"
         - $ref: "#/components/schemas/BatchResultsComplete"
     BatchResultsValidationFailed:
@@ -161,7 +161,7 @@ components:
         - "status"
       type: "object"
     CellResult:
-      anyOf:
+      oneOf:
         - $ref: "#/components/schemas/CellSuccess"
         - $ref: "#/components/schemas/CellError"
         - $ref: "#/components/schemas/CellPending"
@@ -314,9 +314,9 @@ components:
             - type: "number"
             - type: "boolean"
             - items:
-                type:
-                  - "string"
-                  - "number"
+                anyOf:
+                  - type: "string"
+                  - type: "number"
               type: "array"
       required:
         - "field"
@@ -329,6 +329,54 @@ components:
       maxItems: 5
       minItems: 1
       type: "array"
+    NextQueryModeCompanyResultsResponse:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PublicApiCompanySearchResult"
+          type: "array"
+        exhaustion_reason:
+          enum:
+            - "query_limit"
+            - "no_more_results"
+          type: "string"
+        has_more:
+          type: "boolean"
+        source_type:
+          const: "companies"
+          type: "string"
+      required:
+        - "data"
+        - "has_more"
+        - "source_type"
+      type: "object"
+    NextQueryModePeopleResultsResponse:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PublicApiPersonSearchResult"
+          type: "array"
+        exhaustion_reason:
+          enum:
+            - "query_limit"
+            - "no_more_results"
+          type: "string"
+        has_more:
+          type: "boolean"
+        source_type:
+          const: "people"
+          type: "string"
+      required:
+        - "data"
+        - "has_more"
+        - "source_type"
+      type: "object"
+    NextQueryModeResultsResponse:
+      oneOf:
+        - $ref: "#/components/schemas/NextQueryModePeopleResultsResponse"
+        - $ref: "#/components/schemas/NextQueryModeCompanyResultsResponse"
     NextSearchResultsBody:
       additionalProperties: false
       properties:
@@ -351,6 +399,148 @@ components:
       required:
         - "data"
         - "has_more"
+      type: "object"
+    PublicApiCompanySearchResult:
+      additionalProperties: false
+      properties:
+        annual_revenue:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        clay_company_id:
+          type: "number"
+        country:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        domain:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        industry:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        linkedin_url:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        location:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        name:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        size:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        total_funding_amount_range_usd:
+          anyOf:
+            - type: "number"
+            - type: "null"
+        type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+      required:
+        - "clay_company_id"
+        - "name"
+        - "size"
+        - "type"
+        - "domain"
+        - "country"
+        - "industry"
+        - "location"
+        - "description"
+        - "linkedin_url"
+        - "annual_revenue"
+        - "total_funding_amount_range_usd"
+      type: "object"
+    PublicApiMatchedExperience:
+      additionalProperties: false
+      properties:
+        company:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        end_date:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        location:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        start_date:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        title:
+          anyOf:
+            - type: "string"
+            - type: "null"
+      required:
+        - "company"
+        - "title"
+        - "location"
+        - "start_date"
+        - "end_date"
+      type: "object"
+    PublicApiPersonSearchResult:
+      additionalProperties: false
+      properties:
+        clay_profile_id:
+          type: "number"
+        first_name:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        last_name:
+          anyOf:
+            - type: "string"
+            - type: "null"
+        location:
+          additionalProperties: false
+          properties:
+            city:
+              anyOf:
+                - type: "string"
+                - type: "null"
+            name:
+              anyOf:
+                - type: "string"
+                - type: "null"
+            state_or_province:
+              anyOf:
+                - type: "string"
+                - type: "null"
+          required:
+            - "name"
+            - "city"
+            - "state_or_province"
+          type: "object"
+        matched_experiences:
+          items:
+            $ref: "#/components/schemas/PublicApiMatchedExperience"
+          type: "array"
+        name:
+          anyOf:
+            - type: "string"
+            - type: "null"
+      required:
+        - "clay_profile_id"
+        - "name"
+        - "first_name"
+        - "last_name"
+        - "location"
+        - "matched_experiences"
       type: "object"
     QueryResponse:
       additionalProperties: false
@@ -647,6 +837,7 @@ components:
           maxItems: 4
           type: "array"
         order_by:
+          description: "Custom sort. Queries with a custom order_by do not support cursor pagination."
           items:
             additionalProperties: false
             properties:
@@ -693,6 +884,7 @@ components:
       additionalProperties: false
       properties:
         cursor:
+          description: "Opaque cursor from the previous response. Scans page in least-recently-updated-first order and reflect concurrent writes: a record updated mid-scan can be returned again, so deduplicate by id."
           type: "string"
         limit:
           default: 50
@@ -729,7 +921,6 @@ paths:
           content:
             application/json:
               schema:
-                $schema: "http://json-schema.org/draft-07/schema#"
                 additionalProperties: false
                 properties:
                   user:
@@ -738,9 +929,9 @@ paths:
                       id:
                         type: "string"
                       name:
-                        type:
-                          - "string"
-                          - "null"
+                        anyOf:
+                          - type: "string"
+                          - type: "null"
                     required:
                       - "id"
                       - "name"
@@ -896,6 +1087,7 @@ paths:
             schema:
               $ref: "#/components/schemas/RunRoutineRequest"
         description: "Body"
+        required: true
       responses:
         "202":
           content:
@@ -952,6 +1144,7 @@ paths:
             schema:
               $ref: "#/components/schemas/StartBatchRequest"
         description: "Body"
+        required: true
       responses:
         "202":
           content:
@@ -1047,6 +1240,7 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateSearchRequest"
         description: "Body"
+        required: true
       responses:
         "200":
           content:
@@ -1169,6 +1363,89 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: "401"
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "402"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "403"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "404"
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "413"
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "429"
+      summary: "Run the search iterator and return the next page of results"
+      tags:
+        - "search"
+  /search/query-mode:
+    post:
+      description: "Starts a new Clay search from a Clay advanced search query. The source type is detected from the query and returned in the response. Count-mode and jobs queries are not supported."
+      operationId: "createQueryMode"
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                query:
+                  minLength: 1
+                  type: "string"
+              required:
+                - "query"
+              type: "object"
+        description: "Body"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  search_id:
+                    type: "string"
+                  source_type:
+                    enum:
+                      - "people"
+                      - "companies"
+                    type: "string"
+                required:
+                  - "search_id"
+                  - "source_type"
+                type: "object"
+          description: "200"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "400"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "401"
         "403":
           content:
             application/json:
@@ -1187,12 +1464,113 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: "429"
-      summary: "Run the search iterator and return the next page of results"
+      summary: "Create a search from a Clay search query (beta)"
+      tags:
+        - "search"
+  /search/query-mode/reference:
+    get:
+      description: "Returns the Clay search query reference document (markdown), covering the queryable fields and the query grammar. Use it to author a Clay advanced search query before creating a query-mode search."
+      operationId: "queryModeReference"
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  reference:
+                    type: "string"
+                required:
+                  - "reference"
+                type: "object"
+          description: "200"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "400"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "401"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "403"
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "429"
+      summary: "Get the Clay search query reference (beta)"
+      tags:
+        - "search"
+  /search/query-mode/{search_id}/run:
+    post:
+      description: "Returns the next page of records for an existing query-mode search."
+      operationId: "runQueryMode"
+      parameters:
+        - in: "path"
+          name: "search_id"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NextSearchResultsBody"
+        description: "Body"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NextQueryModeResultsResponse"
+          description: "200"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "400"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "401"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "403"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "404"
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "429"
+      summary: "Run the query-mode iterator and return the next page of results (beta)"
       tags:
         - "search"
   /tables/query:
     post:
-      description: "Runs a structured query against Clay table data and returns records with field metadata."
+      description: "Runs a structured query against Clay table data and returns records with field metadata. Results are paginated: pass the returned cursor back to fetch the next page. Scans return rows in least-recently-updated-first order and reflect writes that land while you paginate — a scan returns every record visible when it started and picks up records written while it runs, and a record updated mid-scan can be returned again with fresher data, so deduplicate by id if you need each record once."
       operationId: "query"
       parameters: []
       requestBody:
@@ -1201,6 +1579,7 @@ paths:
             schema:
               $ref: "#/components/schemas/StructuredQueryRequest"
         description: "Body"
+        required: true
       responses:
         "200":
           content:
@@ -1256,7 +1635,7 @@ tags:
   - description: "Authenticated user and workspace endpoints."
     name: "me"
   - description: "Search creation and pagination endpoints."
-    name: "searches"
+    name: "search"
   - description: "Structured table query endpoints."
     name: "tables"
   - description: "Routine discovery and execution endpoints."

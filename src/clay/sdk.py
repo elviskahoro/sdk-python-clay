@@ -29,6 +29,7 @@ class Clay(BaseSDK):
     routines: "Routines"
     r"""Routine discovery and execution endpoints."""
     search: "Search"
+    r"""Search creation and pagination endpoints."""
     tables: "Tables"
     r"""Structured table query endpoints."""
     _sub_sdk_map = {

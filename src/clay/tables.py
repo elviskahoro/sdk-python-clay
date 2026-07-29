@@ -3,10 +3,10 @@
 from .basesdk import BaseSDK
 from clay import errors, models, utils
 from clay._hooks import HookContext
-from clay.types import BaseModel, OptionalNullable, UNSET
+from clay.types import OptionalNullable, UNSET
 from clay.utils import get_security_from_env
 from clay.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, Mapping, Optional, Union
 
 
 class Tables(BaseSDK):
@@ -15,9 +15,9 @@ class Tables(BaseSDK):
     def query(
         self,
         *,
-        request: Optional[
-            Union[models.StructuredQueryRequest, models.StructuredQueryRequestTypedDict]
-        ] = None,
+        query: Union[models.StructuredQuery, models.StructuredQueryTypedDict],
+        cursor: Optional[str] = None,
+        limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -25,9 +25,11 @@ class Tables(BaseSDK):
     ) -> models.QueryResponse:
         r"""Run a structured query across one or more tables
 
-        Runs a structured query against Clay table data and returns records with field metadata.
+        Runs a structured query against Clay table data and returns records with field metadata. Results are paginated: pass the returned cursor back to fetch the next page. Scans return rows in least-recently-updated-first order and reflect writes that land while you paginate — a scan returns every record visible when it started and picks up records written while it runs, and a record updated mid-scan can be returned again with fresher data, so deduplicate by id if you need each record once.
 
-        :param request: The request object to send.
+        :param query:
+        :param cursor: Opaque cursor from the previous response. Scans page in least-recently-updated-first order and reflect concurrent writes: a record updated mid-scan can be returned again, so deduplicate by id.
+        :param limit:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,9 +45,11 @@ class Tables(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.StructuredQueryRequest])
-        request = cast(Optional[models.StructuredQueryRequest], request)
+        request = models.StructuredQueryRequest(
+            cursor=cursor,
+            limit=limit,
+            query=utils.get_pydantic_model(query, models.StructuredQuery),
+        )
 
         req = self._build_request(
             method="POST",
@@ -53,7 +57,7 @@ class Tables(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -61,7 +65,7 @@ class Tables(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.StructuredQueryRequest]
+                request, False, False, "json", models.StructuredQueryRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -112,9 +116,9 @@ class Tables(BaseSDK):
     async def query_async(
         self,
         *,
-        request: Optional[
-            Union[models.StructuredQueryRequest, models.StructuredQueryRequestTypedDict]
-        ] = None,
+        query: Union[models.StructuredQuery, models.StructuredQueryTypedDict],
+        cursor: Optional[str] = None,
+        limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -122,9 +126,11 @@ class Tables(BaseSDK):
     ) -> models.QueryResponse:
         r"""Run a structured query across one or more tables
 
-        Runs a structured query against Clay table data and returns records with field metadata.
+        Runs a structured query against Clay table data and returns records with field metadata. Results are paginated: pass the returned cursor back to fetch the next page. Scans return rows in least-recently-updated-first order and reflect writes that land while you paginate — a scan returns every record visible when it started and picks up records written while it runs, and a record updated mid-scan can be returned again with fresher data, so deduplicate by id if you need each record once.
 
-        :param request: The request object to send.
+        :param query:
+        :param cursor: Opaque cursor from the previous response. Scans page in least-recently-updated-first order and reflect concurrent writes: a record updated mid-scan can be returned again, so deduplicate by id.
+        :param limit:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -140,9 +146,11 @@ class Tables(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.StructuredQueryRequest])
-        request = cast(Optional[models.StructuredQueryRequest], request)
+        request = models.StructuredQueryRequest(
+            cursor=cursor,
+            limit=limit,
+            query=utils.get_pydantic_model(query, models.StructuredQuery),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -150,7 +158,7 @@ class Tables(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -158,7 +166,7 @@ class Tables(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.StructuredQueryRequest]
+                request, False, False, "json", models.StructuredQueryRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

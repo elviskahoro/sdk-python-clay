@@ -11,6 +11,7 @@ from typing_extensions import NotRequired, TypedDict
 class StructuredQueryRequestTypedDict(TypedDict):
     query: StructuredQueryTypedDict
     cursor: NotRequired[str]
+    r"""Opaque cursor from the previous response. Scans page in least-recently-updated-first order and reflect concurrent writes: a record updated mid-scan can be returned again, so deduplicate by id."""
     limit: NotRequired[int]
 
 
@@ -18,6 +19,7 @@ class StructuredQueryRequest(BaseModel):
     query: StructuredQuery
 
     cursor: Optional[str] = None
+    r"""Opaque cursor from the previous response. Scans page in least-recently-updated-first order and reflect concurrent writes: a record updated mid-scan can be returned again, so deduplicate by id."""
 
     limit: Optional[int] = 50
 

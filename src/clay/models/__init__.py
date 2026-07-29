@@ -44,6 +44,13 @@ if TYPE_CHECKING:
     from .cellpending import CellPending, CellPendingStatus, CellPendingTypedDict
     from .cellresult import CellResult, CellResultTypedDict, UnknownCellResult
     from .cellsuccess import CellSuccess, CellSuccessTypedDict
+    from .createquerymodeop import (
+        CreateQueryModeRequest,
+        CreateQueryModeRequestTypedDict,
+        CreateQueryModeResponse,
+        CreateQueryModeResponseTypedDict,
+        CreateQueryModeSourceType,
+    )
     from .createsearchrequest import (
         CreateSearchRequest,
         CreateSearchRequestSourceType,
@@ -86,6 +93,21 @@ if TYPE_CHECKING:
         GetRunResultsResponseTypedDict,
         UnknownGetRunResultsResponse,
     )
+    from .nextquerymodecompanyresultsresponse import (
+        NextQueryModeCompanyResultsResponse,
+        NextQueryModeCompanyResultsResponseExhaustionReason,
+        NextQueryModeCompanyResultsResponseTypedDict,
+    )
+    from .nextquerymodepeopleresultsresponse import (
+        NextQueryModePeopleResultsResponse,
+        NextQueryModePeopleResultsResponseExhaustionReason,
+        NextQueryModePeopleResultsResponseTypedDict,
+    )
+    from .nextquerymoderesultsresponse import (
+        NextQueryModeResultsResponse,
+        NextQueryModeResultsResponseTypedDict,
+        UnknownNextQueryModeResultsResponse,
+    )
     from .nextsearchresultsbody import (
         NextSearchResultsBody,
         NextSearchResultsBodyTypedDict,
@@ -94,8 +116,27 @@ if TYPE_CHECKING:
         NextSearchResultsResponse,
         NextSearchResultsResponseTypedDict,
     )
+    from .publicapicompanysearchresult import (
+        PublicAPICompanySearchResult,
+        PublicAPICompanySearchResultTypedDict,
+    )
+    from .publicapimatchedexperience import (
+        PublicAPIMatchedExperience,
+        PublicAPIMatchedExperienceTypedDict,
+    )
+    from .publicapipersonsearchresult import (
+        Location,
+        LocationTypedDict,
+        PublicAPIPersonSearchResult,
+        PublicAPIPersonSearchResultTypedDict,
+    )
+    from .querymodereferenceop import (
+        QueryModeReferenceResponse,
+        QueryModeReferenceResponseTypedDict,
+    )
     from .queryresponse import QueryResponse, QueryResponseTypedDict
     from .runop import RunRequest, RunRequestTypedDict
+    from .runquerymodeop import RunQueryModeRequest, RunQueryModeRequestTypedDict
     from .runresultitem import (
         Error,
         ErrorTypedDict,
@@ -202,6 +243,11 @@ __all__ = [
     "CellResultTypedDict",
     "CellSuccess",
     "CellSuccessTypedDict",
+    "CreateQueryModeRequest",
+    "CreateQueryModeRequestTypedDict",
+    "CreateQueryModeResponse",
+    "CreateQueryModeResponseTypedDict",
+    "CreateQueryModeSourceType",
     "CreateSearchRequest",
     "CreateSearchRequestSourceType",
     "CreateSearchRequestTypedDict",
@@ -243,6 +289,16 @@ __all__ = [
     "ItemTypedDict",
     "Join",
     "JoinTypedDict",
+    "Location",
+    "LocationTypedDict",
+    "NextQueryModeCompanyResultsResponse",
+    "NextQueryModeCompanyResultsResponseExhaustionReason",
+    "NextQueryModeCompanyResultsResponseTypedDict",
+    "NextQueryModePeopleResultsResponse",
+    "NextQueryModePeopleResultsResponseExhaustionReason",
+    "NextQueryModePeopleResultsResponseTypedDict",
+    "NextQueryModeResultsResponse",
+    "NextQueryModeResultsResponseTypedDict",
     "NextSearchResultsBody",
     "NextSearchResultsBodyTypedDict",
     "NextSearchResultsResponse",
@@ -252,10 +308,20 @@ __all__ = [
     "Op",
     "OrderBy",
     "OrderByTypedDict",
+    "PublicAPICompanySearchResult",
+    "PublicAPICompanySearchResultTypedDict",
+    "PublicAPIMatchedExperience",
+    "PublicAPIMatchedExperienceTypedDict",
+    "PublicAPIPersonSearchResult",
+    "PublicAPIPersonSearchResultTypedDict",
+    "QueryModeReferenceResponse",
+    "QueryModeReferenceResponseTypedDict",
     "QueryResponse",
     "QueryResponseTypedDict",
     "Request",
     "RequestTypedDict",
+    "RunQueryModeRequest",
+    "RunQueryModeRequestTypedDict",
     "RunRequest",
     "RunRequestTypedDict",
     "RunResultItem",
@@ -305,6 +371,7 @@ __all__ = [
     "UnknownBatchResultsTerminal",
     "UnknownCellResult",
     "UnknownGetRunResultsResponse",
+    "UnknownNextQueryModeResultsResponse",
     "User",
     "UserTypedDict",
     "Value1",
@@ -346,6 +413,11 @@ _dynamic_imports: dict[str, str] = {
     "UnknownCellResult": ".cellresult",
     "CellSuccess": ".cellsuccess",
     "CellSuccessTypedDict": ".cellsuccess",
+    "CreateQueryModeRequest": ".createquerymodeop",
+    "CreateQueryModeRequestTypedDict": ".createquerymodeop",
+    "CreateQueryModeResponse": ".createquerymodeop",
+    "CreateQueryModeResponseTypedDict": ".createquerymodeop",
+    "CreateQueryModeSourceType": ".createquerymodeop",
     "CreateSearchRequest": ".createsearchrequest",
     "CreateSearchRequestSourceType": ".createsearchrequest",
     "CreateSearchRequestTypedDict": ".createsearchrequest",
@@ -380,14 +452,35 @@ _dynamic_imports: dict[str, str] = {
     "GetRunResultsResponse": ".getrunresultsop",
     "GetRunResultsResponseTypedDict": ".getrunresultsop",
     "UnknownGetRunResultsResponse": ".getrunresultsop",
+    "NextQueryModeCompanyResultsResponse": ".nextquerymodecompanyresultsresponse",
+    "NextQueryModeCompanyResultsResponseExhaustionReason": ".nextquerymodecompanyresultsresponse",
+    "NextQueryModeCompanyResultsResponseTypedDict": ".nextquerymodecompanyresultsresponse",
+    "NextQueryModePeopleResultsResponse": ".nextquerymodepeopleresultsresponse",
+    "NextQueryModePeopleResultsResponseExhaustionReason": ".nextquerymodepeopleresultsresponse",
+    "NextQueryModePeopleResultsResponseTypedDict": ".nextquerymodepeopleresultsresponse",
+    "NextQueryModeResultsResponse": ".nextquerymoderesultsresponse",
+    "NextQueryModeResultsResponseTypedDict": ".nextquerymoderesultsresponse",
+    "UnknownNextQueryModeResultsResponse": ".nextquerymoderesultsresponse",
     "NextSearchResultsBody": ".nextsearchresultsbody",
     "NextSearchResultsBodyTypedDict": ".nextsearchresultsbody",
     "NextSearchResultsResponse": ".nextsearchresultsresponse",
     "NextSearchResultsResponseTypedDict": ".nextsearchresultsresponse",
+    "PublicAPICompanySearchResult": ".publicapicompanysearchresult",
+    "PublicAPICompanySearchResultTypedDict": ".publicapicompanysearchresult",
+    "PublicAPIMatchedExperience": ".publicapimatchedexperience",
+    "PublicAPIMatchedExperienceTypedDict": ".publicapimatchedexperience",
+    "Location": ".publicapipersonsearchresult",
+    "LocationTypedDict": ".publicapipersonsearchresult",
+    "PublicAPIPersonSearchResult": ".publicapipersonsearchresult",
+    "PublicAPIPersonSearchResultTypedDict": ".publicapipersonsearchresult",
+    "QueryModeReferenceResponse": ".querymodereferenceop",
+    "QueryModeReferenceResponseTypedDict": ".querymodereferenceop",
     "QueryResponse": ".queryresponse",
     "QueryResponseTypedDict": ".queryresponse",
     "RunRequest": ".runop",
     "RunRequestTypedDict": ".runop",
+    "RunQueryModeRequest": ".runquerymodeop",
+    "RunQueryModeRequestTypedDict": ".runquerymodeop",
     "Error": ".runresultitem",
     "ErrorTypedDict": ".runresultitem",
     "RunResultItem": ".runresultitem",
