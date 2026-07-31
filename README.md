@@ -490,6 +490,11 @@ You can also enable a default debug logger by setting an environment variable `C
 
 # Development
 
+## Beads issue tracking
+
+See [docs/BEADS.md](docs/BEADS.md) for workspace setup and DoltHub
+synchronization commands.
+
 ## Maturity
 
 This SDK is in beta, and there may be breaking changes between versions without a major version update. Therefore, we recommend pinning usage
