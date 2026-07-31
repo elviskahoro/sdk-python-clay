@@ -19,3 +19,18 @@ tmp/
 .trunk/notifications
 .trunk/out
 .trunk/tools
+.beads-local/
+.beads/redirect
+.beads/dolt/
+.beads/embeddeddolt/
+.beads/proxieddb/
+.beads/metadata.json
+.beads/*.jsonl
+.beads/*-state.json
+.beads/last-touched
+.beads/*.lock
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key

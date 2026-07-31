@@ -1,0 +1,8 @@
+# Shared Beads configuration for sdk-python-clay.
+issue-prefix: clay
+sync.remote: "elviskahoro/sdk-python-clay"
+federation.remote: "dolthub://elviskahoro/sdk-python-clay"
+dolt:
+    auto-push: false
+export:
+    auto: false
