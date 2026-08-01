@@ -92,7 +92,9 @@ class Routines(BaseSDK):
             return unmarshal_json_response(models.BatchResultsTerminal, http_res)
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(models.BatchResultsInProgress, http_res)
-        if utils.match_response(http_res, ["401", "404", "429"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "404", "429"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -184,7 +186,9 @@ class Routines(BaseSDK):
             return unmarshal_json_response(models.BatchResultsTerminal, http_res)
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(models.BatchResultsInProgress, http_res)
-        if utils.match_response(http_res, ["401", "404", "429"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "404", "429"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -282,7 +286,9 @@ class Routines(BaseSDK):
             return unmarshal_json_response(models.RunResultsComplete, http_res)
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(models.RunResultsInProgress, http_res)
-        if utils.match_response(http_res, ["401", "404", "429"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "404", "429"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -380,7 +386,9 @@ class Routines(BaseSDK):
             return unmarshal_json_response(models.RunResultsComplete, http_res)
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(models.RunResultsInProgress, http_res)
-        if utils.match_response(http_res, ["401", "404", "429"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "404", "429"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -883,7 +891,7 @@ class Routines(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.BatchUploadURLResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -975,7 +983,7 @@ class Routines(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.BatchUploadURLResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)

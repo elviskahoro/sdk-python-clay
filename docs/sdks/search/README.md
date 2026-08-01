@@ -53,10 +53,10 @@ with Clay(
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | 400, 401, 403, 404, 429 | application/json        |
-| errors.ClayDefaultError | 4XX, 5XX                | \*/\*                   |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.ErrorResponse         | 400, 401, 402, 403, 404, 429 | application/json             |
+| errors.ClayDefaultError      | 4XX, 5XX                     | \*/\*                        |
 
 ## fields
 
@@ -177,10 +177,10 @@ with Clay(
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | 400, 401, 403, 404, 429 | application/json        |
-| errors.ClayDefaultError | 4XX, 5XX                | \*/\*                   |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.ErrorResponse         | 400, 401, 402, 403, 404, 429 | application/json             |
+| errors.ClayDefaultError      | 4XX, 5XX                     | \*/\*                        |
 
 ## query_mode_reference
 
@@ -259,7 +259,7 @@ with Clay(
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | 400, 401, 403, 404, 429 | application/json        |
-| errors.ClayDefaultError | 4XX, 5XX                | \*/\*                   |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.ErrorResponse         | 400, 401, 402, 403, 404, 429 | application/json             |
+| errors.ClayDefaultError      | 4XX, 5XX                     | \*/\*                        |

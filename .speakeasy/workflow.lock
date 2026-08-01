@@ -1,9 +1,9 @@
-speakeasyVersion: 1.789.3
+speakeasyVersion: 1.791.0
 sources:
     Clay Public API:
         sourceNamespace: clay-public-api
-        sourceRevisionDigest: sha256:2776d0b3ec3a7fe847c6aae26012b0b19cc6b60ab1e613a2aac1d2df45debfaa
-        sourceBlobDigest: sha256:02a57db60ad5bfec428b471aec4d65088a292745110e8c607410e5efd2f64518
+        sourceRevisionDigest: sha256:8445d68d8b641ba90fb4dc83a02be2fd7bfe377ad16d7b251b6aca6cb54d3171
+        sourceBlobDigest: sha256:4df283d7a49afe51427460aa1054c9205100be1655adf0ae297ab844264a0730
         tags:
             - latest
             - "0"
@@ -11,8 +11,8 @@ targets:
     clay:
         source: Clay Public API
         sourceNamespace: clay-public-api
-        sourceRevisionDigest: sha256:2776d0b3ec3a7fe847c6aae26012b0b19cc6b60ab1e613a2aac1d2df45debfaa
-        sourceBlobDigest: sha256:02a57db60ad5bfec428b471aec4d65088a292745110e8c607410e5efd2f64518
+        sourceRevisionDigest: sha256:8445d68d8b641ba90fb4dc83a02be2fd7bfe377ad16d7b251b6aca6cb54d3171
+        sourceBlobDigest: sha256:4df283d7a49afe51427460aa1054c9205100be1655adf0ae297ab844264a0730
         codeSamplesNamespace: clay-public-api-python-code-samples
         codeSamplesRevisionDigest: sha256:d1b9888dede088aa37b22947faea4c2f95d586973eb267d1f16a81303fe303b7
 workflow:
