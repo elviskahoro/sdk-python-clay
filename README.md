@@ -32,6 +32,7 @@ Clay Public API: Programmatic access to Clay.
   * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
+  * [Beads issue tracking](#beads-issue-tracking)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
 

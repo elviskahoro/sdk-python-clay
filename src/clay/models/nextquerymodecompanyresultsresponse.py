@@ -23,10 +23,28 @@ NextQueryModeCompanyResultsResponseExhaustionReason = Union[
 ]
 
 
+class NextQueryModeCompanyResultsResponsePeriodQuotaTypedDict(TypedDict):
+    limit: float
+    remaining: float
+    resets_at: str
+    used: float
+
+
+class NextQueryModeCompanyResultsResponsePeriodQuota(BaseModel):
+    limit: float
+
+    remaining: float
+
+    resets_at: str
+
+    used: float
+
+
 class NextQueryModeCompanyResultsResponseTypedDict(TypedDict):
     data: List[PublicAPICompanySearchResultTypedDict]
     has_more: bool
     exhaustion_reason: NotRequired[NextQueryModeCompanyResultsResponseExhaustionReason]
+    period_quota: NotRequired[NextQueryModeCompanyResultsResponsePeriodQuotaTypedDict]
     source_type: Literal["companies"]
 
 
@@ -39,6 +57,8 @@ class NextQueryModeCompanyResultsResponse(BaseModel):
         None
     )
 
+    period_quota: Optional[NextQueryModeCompanyResultsResponsePeriodQuota] = None
+
     source_type: Annotated[
         Annotated[Literal["companies"], AfterValidator(validate_const("companies"))],
         pydantic.Field(alias="source_type"),
@@ -46,7 +66,7 @@ class NextQueryModeCompanyResultsResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["exhaustion_reason"])
+        optional_fields = set(["exhaustion_reason", "period_quota"])
         serialized = handler(self)
         m = {}
 

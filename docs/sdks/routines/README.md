@@ -50,7 +50,7 @@ with Clay(
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | 401, 404, 429           | application/json        |
+| errors.ErrorResponse    | 400, 401, 404, 429      | application/json        |
 | errors.ClayDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## get_run_results
@@ -93,7 +93,7 @@ with Clay(
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | 401, 404, 429           | application/json        |
+| errors.ErrorResponse    | 400, 401, 404, 429      | application/json        |
 | errors.ClayDefaultError | 4XX, 5XX                | \*/\*                   |
 
 ## run_routine
@@ -220,5 +220,5 @@ with Clay(
 
 | Error Type              | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
-| errors.ErrorResponse    | 401, 403, 404, 429      | application/json        |
+| errors.ErrorResponse    | 400, 401, 403, 404, 429 | application/json        |
 | errors.ClayDefaultError | 4XX, 5XX                | \*/\*                   |

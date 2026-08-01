@@ -29,7 +29,6 @@ tmp/
 .beads/*-state.json
 .beads/last-touched
 .beads/*.lock
-
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db

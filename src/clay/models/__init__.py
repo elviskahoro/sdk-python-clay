@@ -96,11 +96,15 @@ if TYPE_CHECKING:
     from .nextquerymodecompanyresultsresponse import (
         NextQueryModeCompanyResultsResponse,
         NextQueryModeCompanyResultsResponseExhaustionReason,
+        NextQueryModeCompanyResultsResponsePeriodQuota,
+        NextQueryModeCompanyResultsResponsePeriodQuotaTypedDict,
         NextQueryModeCompanyResultsResponseTypedDict,
     )
     from .nextquerymodepeopleresultsresponse import (
         NextQueryModePeopleResultsResponse,
         NextQueryModePeopleResultsResponseExhaustionReason,
+        NextQueryModePeopleResultsResponsePeriodQuota,
+        NextQueryModePeopleResultsResponsePeriodQuotaTypedDict,
         NextQueryModePeopleResultsResponseTypedDict,
     )
     from .nextquerymoderesultsresponse import (
@@ -114,6 +118,8 @@ if TYPE_CHECKING:
     )
     from .nextsearchresultsresponse import (
         NextSearchResultsResponse,
+        NextSearchResultsResponsePeriodQuota,
+        NextSearchResultsResponsePeriodQuotaTypedDict,
         NextSearchResultsResponseTypedDict,
     )
     from .publicapicompanysearchresult import (
@@ -293,15 +299,21 @@ __all__ = [
     "LocationTypedDict",
     "NextQueryModeCompanyResultsResponse",
     "NextQueryModeCompanyResultsResponseExhaustionReason",
+    "NextQueryModeCompanyResultsResponsePeriodQuota",
+    "NextQueryModeCompanyResultsResponsePeriodQuotaTypedDict",
     "NextQueryModeCompanyResultsResponseTypedDict",
     "NextQueryModePeopleResultsResponse",
     "NextQueryModePeopleResultsResponseExhaustionReason",
+    "NextQueryModePeopleResultsResponsePeriodQuota",
+    "NextQueryModePeopleResultsResponsePeriodQuotaTypedDict",
     "NextQueryModePeopleResultsResponseTypedDict",
     "NextQueryModeResultsResponse",
     "NextQueryModeResultsResponseTypedDict",
     "NextSearchResultsBody",
     "NextSearchResultsBodyTypedDict",
     "NextSearchResultsResponse",
+    "NextSearchResultsResponsePeriodQuota",
+    "NextSearchResultsResponsePeriodQuotaTypedDict",
     "NextSearchResultsResponseTypedDict",
     "On",
     "OnTypedDict",
@@ -454,9 +466,13 @@ _dynamic_imports: dict[str, str] = {
     "UnknownGetRunResultsResponse": ".getrunresultsop",
     "NextQueryModeCompanyResultsResponse": ".nextquerymodecompanyresultsresponse",
     "NextQueryModeCompanyResultsResponseExhaustionReason": ".nextquerymodecompanyresultsresponse",
+    "NextQueryModeCompanyResultsResponsePeriodQuota": ".nextquerymodecompanyresultsresponse",
+    "NextQueryModeCompanyResultsResponsePeriodQuotaTypedDict": ".nextquerymodecompanyresultsresponse",
     "NextQueryModeCompanyResultsResponseTypedDict": ".nextquerymodecompanyresultsresponse",
     "NextQueryModePeopleResultsResponse": ".nextquerymodepeopleresultsresponse",
     "NextQueryModePeopleResultsResponseExhaustionReason": ".nextquerymodepeopleresultsresponse",
+    "NextQueryModePeopleResultsResponsePeriodQuota": ".nextquerymodepeopleresultsresponse",
+    "NextQueryModePeopleResultsResponsePeriodQuotaTypedDict": ".nextquerymodepeopleresultsresponse",
     "NextQueryModePeopleResultsResponseTypedDict": ".nextquerymodepeopleresultsresponse",
     "NextQueryModeResultsResponse": ".nextquerymoderesultsresponse",
     "NextQueryModeResultsResponseTypedDict": ".nextquerymoderesultsresponse",
@@ -464,6 +480,8 @@ _dynamic_imports: dict[str, str] = {
     "NextSearchResultsBody": ".nextsearchresultsbody",
     "NextSearchResultsBodyTypedDict": ".nextsearchresultsbody",
     "NextSearchResultsResponse": ".nextsearchresultsresponse",
+    "NextSearchResultsResponsePeriodQuota": ".nextsearchresultsresponse",
+    "NextSearchResultsResponsePeriodQuotaTypedDict": ".nextsearchresultsresponse",
     "NextSearchResultsResponseTypedDict": ".nextsearchresultsresponse",
     "PublicAPICompanySearchResult": ".publicapicompanysearchresult",
     "PublicAPICompanySearchResultTypedDict": ".publicapicompanysearchresult",

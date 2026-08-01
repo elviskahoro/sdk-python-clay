@@ -97,7 +97,7 @@ class Search(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.CreateSearchResponse, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "402", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -195,7 +195,7 @@ class Search(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.CreateSearchResponse, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "402", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -686,7 +686,7 @@ class Search(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.CreateQueryModeResponse, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "402", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -781,7 +781,7 @@ class Search(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.CreateQueryModeResponse, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "402", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -1057,7 +1057,7 @@ class Search(BaseSDK):
                 models.NextQueryModeResultsResponse, http_res
             )
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "402", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -1163,7 +1163,7 @@ class Search(BaseSDK):
                 models.NextQueryModeResultsResponse, http_res
             )
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "429"], "application/json"
+            http_res, ["400", "401", "402", "403", "404", "429"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)

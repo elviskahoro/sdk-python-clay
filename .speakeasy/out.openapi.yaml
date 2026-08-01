@@ -343,6 +343,23 @@ components:
           type: "string"
         has_more:
           type: "boolean"
+        period_quota:
+          additionalProperties: false
+          properties:
+            limit:
+              type: "number"
+            remaining:
+              type: "number"
+            resets_at:
+              type: "string"
+            used:
+              type: "number"
+          required:
+            - "limit"
+            - "used"
+            - "remaining"
+            - "resets_at"
+          type: "object"
         source_type:
           const: "companies"
           type: "string"
@@ -365,6 +382,23 @@ components:
           type: "string"
         has_more:
           type: "boolean"
+        period_quota:
+          additionalProperties: false
+          properties:
+            limit:
+              type: "number"
+            remaining:
+              type: "number"
+            resets_at:
+              type: "string"
+            used:
+              type: "number"
+          required:
+            - "limit"
+            - "used"
+            - "remaining"
+            - "resets_at"
+          type: "object"
         source_type:
           const: "people"
           type: "string"
@@ -396,6 +430,23 @@ components:
           type: "array"
         has_more:
           type: "boolean"
+        period_quota:
+          additionalProperties: false
+          properties:
+            limit:
+              type: "number"
+            remaining:
+              type: "number"
+            resets_at:
+              type: "string"
+            used:
+              type: "number"
+          required:
+            - "limit"
+            - "used"
+            - "remaining"
+            - "resets_at"
+          type: "object"
       required:
         - "data"
         - "has_more"
@@ -981,6 +1032,8 @@ paths:
           name: "routine_run_id"
           required: true
           schema:
+            maxLength: 64
+            minLength: 1
             type: "string"
       responses:
         "200":
@@ -995,6 +1048,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchResultsInProgress"
           description: "202"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "400"
         "401":
           content:
             application/json:
@@ -1025,6 +1084,8 @@ paths:
           name: "routine_run_id"
           required: true
           schema:
+            maxLength: 64
+            minLength: 1
             type: "string"
         - in: "query"
           name: "cursor"
@@ -1050,6 +1111,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RunResultsInProgress"
           description: "202"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "400"
         "401":
           content:
             application/json:
@@ -1080,6 +1147,8 @@ paths:
           name: "routine_id"
           required: true
           schema:
+            maxLength: 64
+            minLength: 1
             type: "string"
       requestBody:
         content:
@@ -1137,6 +1206,8 @@ paths:
           name: "routine_id"
           required: true
           schema:
+            maxLength: 64
+            minLength: 1
             type: "string"
       requestBody:
         content:
@@ -1194,6 +1265,8 @@ paths:
           name: "routine_id"
           required: true
           schema:
+            maxLength: 64
+            minLength: 1
             type: "string"
       responses:
         "200":
@@ -1202,6 +1275,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchUploadUrlResponse"
           description: "200"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "400"
         "401":
           content:
             application/json:
@@ -1260,6 +1339,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: "401"
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "402"
         "403":
           content:
             application/json:
@@ -1446,6 +1531,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: "401"
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "402"
         "403":
           content:
             application/json:
@@ -1547,6 +1638,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: "401"
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "402"
         "403":
           content:
             application/json:
