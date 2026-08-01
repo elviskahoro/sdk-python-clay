@@ -24,6 +24,8 @@
 
 set -euo pipefail
 
+trap 'code=$?; if [[ ${code} -eq 141 ]]; then echo "release.sh hit a transient SIGPIPE (exit 141) - this is a known intermittent shell/pipe issue, not a logic bug; just re-run the script." >&2; fi; exit ${code}' EXIT
+
 dry_run=0
 assume_yes=0
 explicit_version=""
@@ -88,18 +90,18 @@ echo "Release commit: ${commit_sha} ${commit_subject}"
 
 pyproject_version="$(
   git show "${release_commit}:pyproject.toml" \
-    | uv run --no-project python -c "import sys, tomllib; print(tomllib.loads(sys.stdin.read())['project']['version'])"
+    | python3 -c "import sys, tomllib; print(tomllib.loads(sys.stdin.read())['project']['version'])"
 )"
 
 version_py_version="$(
   git show "${release_commit}:src/clay/_version.py" \
-    | grep -m1 '^__version__: str' \
+    | grep '^__version__: str' \
     | sed -E 's/^__version__: str = "([^"]+)"/\1/'
 )"
 
 gen_lock_version="$(
   git show "${release_commit}:.speakeasy/gen.lock" \
-    | grep -m1 'releaseVersion:' \
+    | grep 'releaseVersion:' \
     | sed -E 's/^[[:space:]]*releaseVersion:[[:space:]]*//'
 )"
 
