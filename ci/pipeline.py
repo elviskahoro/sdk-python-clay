@@ -6,7 +6,8 @@ Commands:
     generate [--force]         Refresh the spec and regenerate the SDK
     test                       Type-check the generated SDK in a container
     build                      Build wheel and source distribution in a container
-    ci [--force]               Refresh, generate, check, and build
+    publish                    Build and publish artifacts to PyPI
+    ci [--force] [--publish]   Refresh, generate, check, build, and optionally publish
 
 Run through the Dagger CLI so the module's isolated steps use the same
 environment locally and in CI::
@@ -37,6 +38,7 @@ from dagger import Directory, Doc, dag, function  # type: ignore[import-untyped]
 
 _OPENAPI_URL = "https://developers.clay.com/openapi.json"
 _OPENAPI_PATH = Path("openapi/openapi.json")
+_PYPI_PUBLISHER_MODULE = "github.com/elviskahoro/sdk-python-publish-to-pypi@main"
 
 
 def fetch_latest_spec() -> Path:
@@ -85,6 +87,8 @@ def _host_source_dir() -> Directory:
             ".git",
             ".venv",
             ".beads",
+            ".env",
+            ".env.*",
             "dist",
             ".mypy_cache",
             ".pytest_cache",
@@ -100,6 +104,64 @@ def _replace_dist_directory() -> None:
         dist_dir.unlink()
     elif dist_dir.is_dir():
         shutil.rmtree(dist_dir)
+
+
+def _load_pypi_token() -> None:
+    """Load PYPI_TOKEN from the environment or the untracked .env.local file.
+
+    The token is only placed in this process environment. The publisher accepts
+    it through Dagger's ``env:PYPI_TOKEN`` secret mechanism, so it is neither
+    printed nor copied into the generated SDK or build artifacts.
+    """
+    if os.environ.get("PYPI_TOKEN"):
+        return
+
+    env_file = Path(".env.local")
+    if env_file.is_file():
+        for raw_line in env_file.read_text().splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if line.startswith("export "):
+                line = line.removeprefix("export ").lstrip()
+            key, separator, value = line.partition("=")
+            if key.strip() != "PYPI_TOKEN" or not separator:
+                continue
+            value = value.strip()
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+                value = value[1:-1]
+            if value:
+                os.environ["PYPI_TOKEN"] = value
+                return
+
+    raise RuntimeError("PYPI_TOKEN is not set and was not found in .env.local")
+
+
+def _publish_artifacts() -> None:
+    """Publish the freshly built artifacts through the shared Dagger module."""
+    if not Path("dist").is_dir():
+        raise RuntimeError("dist/ does not exist; run the build command before publishing")
+    # ``dagger run`` injects connection variables for its current session. The
+    # publisher is a separate Dagger module, so it must start its own session
+    # rather than attempting to nest a client inside the parent session.
+    publisher_environment = {
+        key: value for key, value in os.environ.items() if not key.startswith("DAGGER_")
+    }
+    subprocess.run(
+        [
+            "dagger",
+            "-m",
+            _PYPI_PUBLISHER_MODULE,
+            "call",
+            "publish-artifacts",
+            "--artifacts",
+            "./dist",
+            "--pypi-token",
+            "env:PYPI_TOKEN",
+        ],
+        check=True,
+        env=publisher_environment,
+    )
 
 
 class ClaySDKPipeline:
@@ -202,10 +264,20 @@ async def cmd_build() -> None:
         print("Build completed successfully (artifacts in ./dist)", file=sys.stderr)
 
 
-async def cmd_ci(*, force: bool) -> None:
+async def cmd_publish() -> None:
+    """Build the SDK once and publish its artifacts to PyPI."""
+    _load_pypi_token()
+    await cmd_build()
+    _publish_artifacts()
+
+
+async def cmd_ci(*, force: bool, publish: bool) -> None:
     await cmd_generate(force=force)
     await cmd_test()
     await cmd_build()
+    if publish:
+        _load_pypi_token()
+        _publish_artifacts()
 
 
 def main() -> None:
@@ -214,10 +286,12 @@ def main() -> None:
     subparsers.add_parser("fetch-openapi", help="Refresh openapi/openapi.json from Clay")
     subparsers.add_parser("test", help="Compile and type-check the SDK in Dagger")
     subparsers.add_parser("build", help="Build distribution artifacts in Dagger")
+    subparsers.add_parser("publish", help="Build and publish artifacts to PyPI")
     generate = subparsers.add_parser("generate", help="Refresh the spec and regenerate the SDK")
     generate.add_argument("--force", action="store_true", help="Force Speakeasy regeneration")
-    ci = subparsers.add_parser("ci", help="Refresh, generate, check, and build")
+    ci = subparsers.add_parser("ci", help="Refresh, generate, check, build, and optionally publish")
     ci.add_argument("--force", action="store_true", help="Force Speakeasy regeneration")
+    ci.add_argument("--publish", action="store_true", help="Publish freshly built artifacts to PyPI")
     args = parser.parse_args()
 
     if args.command == "fetch-openapi":
@@ -228,8 +302,10 @@ def main() -> None:
         asyncio.run(cmd_test())
     elif args.command == "build":
         asyncio.run(cmd_build())
+    elif args.command == "publish":
+        asyncio.run(cmd_publish())
     elif args.command == "ci":
-        asyncio.run(cmd_ci(force=args.force))
+        asyncio.run(cmd_ci(force=args.force, publish=args.publish))
 
 
 if __name__ == "__main__":

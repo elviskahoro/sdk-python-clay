@@ -21,6 +21,19 @@ generation, or authenticate the local Speakeasy CLI with `speakeasy auth login`.
 
 To fetch only, run `dagger run uv run python ci/pipeline.py fetch-openapi`.
 
+To build and publish the latest generated package to PyPI, add `PYPI_TOKEN` to
+the untracked `.env.local` file, then run:
+
+```shell
+dagger run uv run python ci/pipeline.py publish
+```
+
+Publishing uses the shared
+[`sdk-python-publish-to-pypi`](https://github.com/elviskahoro/sdk-python-publish-to-pypi)
+Dagger module. The token is supplied as a Dagger secret and is not copied into
+the SDK or distribution artifacts. To generate, validate, build, and publish in
+one command, use `dagger run uv run python ci/pipeline.py ci --publish`.
+
 The manual equivalent is:
 
 ```shell
