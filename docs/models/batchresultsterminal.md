@@ -9,6 +9,12 @@
 value: models.BatchResultsValidationFailed = /* values here */
 ```
 
+### `models.BatchResultsProcessingFailed`
+
+```python
+value: models.BatchResultsProcessingFailed = /* values here */
+```
+
 ### `models.BatchResultsComplete`
 
 ```python

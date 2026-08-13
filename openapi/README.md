@@ -9,7 +9,19 @@ Note that the API host itself (`https://api.clay.com/public/v0`) does **not** se
 spec; every path there sits behind an auth wall and 404s even with a valid key. Use the
 docs host above.
 
-To refresh:
+To refresh with the Dagger pipeline:
+
+```shell
+dagger run uv run python ci/pipeline.py generate
+```
+
+This fetches the current document, runs Speakeasy, and exports the generated
+SDK back to the checkout. Set `SPEAKEASY_API_KEY` for fully isolated Dagger
+generation, or authenticate the local Speakeasy CLI with `speakeasy auth login`.
+
+To fetch only, run `dagger run uv run python ci/pipeline.py fetch-openapi`.
+
+The manual equivalent is:
 
 ```shell
 curl -sL https://developers.clay.com/openapi.json \

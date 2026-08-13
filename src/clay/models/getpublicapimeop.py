@@ -3,12 +3,14 @@
 from __future__ import annotations
 from clay.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class UserTypedDict(TypedDict):
     id: str
     name: Nullable[str]
+    cli_onboarded: NotRequired[bool]
 
 
 class User(BaseModel):
@@ -16,17 +18,30 @@ class User(BaseModel):
 
     name: Nullable[str]
 
+    cli_onboarded: Optional[bool] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["cli_onboarded"])
+        nullable_fields = set(["name"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 

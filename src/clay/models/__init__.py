@@ -18,6 +18,12 @@ if TYPE_CHECKING:
         BatchResultsInProgress,
         BatchResultsInProgressTypedDict,
     )
+    from .batchresultsprocessingfailed import (
+        BatchResultsProcessingFailed,
+        BatchResultsProcessingFailedError,
+        BatchResultsProcessingFailedErrorTypedDict,
+        BatchResultsProcessingFailedTypedDict,
+    )
     from .batchresultsterminal import (
         BatchResultsTerminal,
         BatchResultsTerminalTypedDict,
@@ -144,9 +150,9 @@ if TYPE_CHECKING:
     from .runop import RunRequest, RunRequestTypedDict
     from .runquerymodeop import RunQueryModeRequest, RunQueryModeRequestTypedDict
     from .runresultitem import (
-        Error,
-        ErrorTypedDict,
         RunResultItem,
+        RunResultItemError,
+        RunResultItemErrorTypedDict,
         RunResultItemStatus,
         RunResultItemTypedDict,
     )
@@ -228,6 +234,10 @@ __all__ = [
     "BatchResultsCompleteTypedDict",
     "BatchResultsInProgress",
     "BatchResultsInProgressTypedDict",
+    "BatchResultsProcessingFailed",
+    "BatchResultsProcessingFailedError",
+    "BatchResultsProcessingFailedErrorTypedDict",
+    "BatchResultsProcessingFailedTypedDict",
     "BatchResultsTerminal",
     "BatchResultsTerminalTypedDict",
     "BatchResultsValidationFailed",
@@ -260,8 +270,6 @@ __all__ = [
     "CreateSearchResponse",
     "CreateSearchResponseTypedDict",
     "Direction",
-    "Error",
-    "ErrorTypedDict",
     "FieldMeta",
     "FieldMetaTypedDict",
     "FieldMode",
@@ -337,6 +345,8 @@ __all__ = [
     "RunRequest",
     "RunRequestTypedDict",
     "RunResultItem",
+    "RunResultItemError",
+    "RunResultItemErrorTypedDict",
     "RunResultItemStatus",
     "RunResultItemTypedDict",
     "RunResultsComplete",
@@ -402,6 +412,10 @@ _dynamic_imports: dict[str, str] = {
     "BatchResultsCompleteTypedDict": ".batchresultscomplete",
     "BatchResultsInProgress": ".batchresultsinprogress",
     "BatchResultsInProgressTypedDict": ".batchresultsinprogress",
+    "BatchResultsProcessingFailed": ".batchresultsprocessingfailed",
+    "BatchResultsProcessingFailedError": ".batchresultsprocessingfailed",
+    "BatchResultsProcessingFailedErrorTypedDict": ".batchresultsprocessingfailed",
+    "BatchResultsProcessingFailedTypedDict": ".batchresultsprocessingfailed",
     "BatchResultsTerminal": ".batchresultsterminal",
     "BatchResultsTerminalTypedDict": ".batchresultsterminal",
     "UnknownBatchResultsTerminal": ".batchresultsterminal",
@@ -499,9 +513,9 @@ _dynamic_imports: dict[str, str] = {
     "RunRequestTypedDict": ".runop",
     "RunQueryModeRequest": ".runquerymodeop",
     "RunQueryModeRequestTypedDict": ".runquerymodeop",
-    "Error": ".runresultitem",
-    "ErrorTypedDict": ".runresultitem",
     "RunResultItem": ".runresultitem",
+    "RunResultItemError": ".runresultitem",
+    "RunResultItemErrorTypedDict": ".runresultitem",
     "RunResultItemStatus": ".runresultitem",
     "RunResultItemTypedDict": ".runresultitem",
     "RunResultsComplete": ".runresultscomplete",

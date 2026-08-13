@@ -1,0 +1,10 @@
+# BatchResultsProcessingFailed
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `error`                                                                                    | [models.BatchResultsProcessingFailedError](../models/batchresultsprocessingfailederror.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `routine_run_id`                                                                           | *str*                                                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `status`                                                                                   | *Literal["processing_failed"]*                                                             | :heavy_check_mark:                                                                         | N/A                                                                                        |

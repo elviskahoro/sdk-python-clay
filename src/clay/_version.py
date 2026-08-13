@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "gtm-clay"
-__version__: str = "0.0.4"
+__version__: str = "0.0.6"
 __openapi_doc_version__: str = "0"
-__gen_version__: str = "2.924.0"
-__user_agent__: str = "speakeasy-sdk/python 0.0.4 2.924.0 0 gtm-clay"
+__gen_version__: str = "2.928.0"
+__user_agent__: str = "speakeasy-sdk/python 0.0.6 2.928.0 0 gtm-clay"
 
 try:
     if __package__ is not None:

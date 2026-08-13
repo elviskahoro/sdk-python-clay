@@ -1,4 +1,4 @@
-speakeasyVersion: 1.791.0
+speakeasyVersion: 1.793.1
 sources:
     Clay Public API:
         sourceNamespace: clay-public-api
@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:8445d68d8b641ba90fb4dc83a02be2fd7bfe377ad16d7b251b6aca6cb54d3171
         sourceBlobDigest: sha256:4df283d7a49afe51427460aa1054c9205100be1655adf0ae297ab844264a0730
         codeSamplesNamespace: clay-public-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:d1b9888dede088aa37b22947faea4c2f95d586973eb267d1f16a81303fe303b7
+        codeSamplesRevisionDigest: sha256:1004263eeac99ded1aa047b60f925489dfb0decde5c872b93d9b9683fce55e31
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

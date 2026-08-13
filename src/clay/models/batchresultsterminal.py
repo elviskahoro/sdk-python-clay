@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .batchresultscomplete import BatchResultsComplete, BatchResultsCompleteTypedDict
+from .batchresultsprocessingfailed import (
+    BatchResultsProcessingFailed,
+    BatchResultsProcessingFailedTypedDict,
+)
 from .batchresultsvalidationfailed import (
     BatchResultsValidationFailed,
     BatchResultsValidationFailedTypedDict,
@@ -17,7 +21,11 @@ from typing_extensions import Annotated, TypeAliasType
 
 BatchResultsTerminalTypedDict = TypeAliasType(
     "BatchResultsTerminalTypedDict",
-    Union[BatchResultsValidationFailedTypedDict, BatchResultsCompleteTypedDict],
+    Union[
+        BatchResultsValidationFailedTypedDict,
+        BatchResultsProcessingFailedTypedDict,
+        BatchResultsCompleteTypedDict,
+    ],
 )
 
 
@@ -33,13 +41,17 @@ class UnknownBatchResultsTerminal(BaseModel):
 
 _BATCH_RESULTS_TERMINAL_VARIANTS: dict[str, Any] = {
     "validation_failed": BatchResultsValidationFailed,
+    "processing_failed": BatchResultsProcessingFailed,
     "complete": BatchResultsComplete,
 }
 
 
 BatchResultsTerminal = Annotated[
     Union[
-        BatchResultsValidationFailed, BatchResultsComplete, UnknownBatchResultsTerminal
+        BatchResultsValidationFailed,
+        BatchResultsProcessingFailed,
+        BatchResultsComplete,
+        UnknownBatchResultsTerminal,
     ],
     BeforeValidator(
         partial(

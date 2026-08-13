@@ -64,9 +64,31 @@ components:
         - "finished"
         - "status"
       type: "object"
+    BatchResultsProcessingFailed:
+      additionalProperties: false
+      properties:
+        error:
+          additionalProperties: false
+          properties:
+            message:
+              type: "string"
+          required:
+            - "message"
+          type: "object"
+        routine_run_id:
+          type: "string"
+        status:
+          const: "processing_failed"
+          type: "string"
+      required:
+        - "routine_run_id"
+        - "status"
+        - "error"
+      type: "object"
     BatchResultsTerminal:
       oneOf:
         - $ref: "#/components/schemas/BatchResultsValidationFailed"
+        - $ref: "#/components/schemas/BatchResultsProcessingFailed"
         - $ref: "#/components/schemas/BatchResultsComplete"
     BatchResultsValidationFailed:
       additionalProperties: false
@@ -977,6 +999,8 @@ paths:
                   user:
                     additionalProperties: false
                     properties:
+                      cli_onboarded:
+                        type: "boolean"
                       id:
                         type: "string"
                       name:

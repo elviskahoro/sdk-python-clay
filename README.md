@@ -14,8 +14,6 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *clay
 ## Summary
 
 Clay Public API: Programmatic access to Clay.
-
-- [openapi](https://developers.clay.com/openapi.json)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->

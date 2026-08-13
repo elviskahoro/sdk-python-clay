@@ -7,11 +7,11 @@ from typing import Any, Dict, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-class ErrorTypedDict(TypedDict):
+class RunResultItemErrorTypedDict(TypedDict):
     message: str
 
 
-class Error(BaseModel):
+class RunResultItemError(BaseModel):
     message: str
 
 
@@ -27,7 +27,7 @@ RunResultItemStatus = Union[
 class RunResultItemTypedDict(TypedDict):
     id: str
     status: RunResultItemStatus
-    error: NotRequired[ErrorTypedDict]
+    error: NotRequired[RunResultItemErrorTypedDict]
     result: NotRequired[Dict[str, Any]]
 
 
@@ -36,7 +36,7 @@ class RunResultItem(BaseModel):
 
     status: RunResultItemStatus
 
-    error: Optional[Error] = None
+    error: Optional[RunResultItemError] = None
 
     result: Optional[Dict[str, Any]] = None
 

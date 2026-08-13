@@ -34,9 +34,10 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.0.4
+  version: 0.0.6
   additionalDependencies:
-    dev: {}
+    dev:
+      dagger-io: '>=0.20.5'
     main: {}
   allowedRedefinedBuiltins:
     - id
