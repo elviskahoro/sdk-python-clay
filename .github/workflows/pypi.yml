@@ -18,21 +18,23 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-
       - name: Verify tag matches package version
         if: github.ref_type == 'tag'
         run: |
           tag_version="${GITHUB_REF_NAME#v}"
-          pyproject_version="$(uv run --no-project python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")"
+          pyproject_version="$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")"
           if [[ "${tag_version}" != "${pyproject_version}" ]]; then
             echo "Tag v${tag_version} does not match pyproject.toml version ${pyproject_version}" >&2
             exit 1
           fi
 
-      - name: Build distribution
-        run: uv build
+      - name: Set up Dagger
+        uses: dagger/dagger-for-github@v8.4.1
+
+      - name: Build distribution with shared publisher
+        run: >-
+          dagger -m github.com/elviskahoro/sdk-python-publish-to-pypi@main call build
+          --source . export --path dist
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
